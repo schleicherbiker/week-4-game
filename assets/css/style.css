@@ -1,0 +1,102 @@
+body {
+    background: url("../images/background.jpg") repeat center;
+    background-color: red;
+}
+
+.text {
+    color: #ddd;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+}
+
+#title {
+    background: gray;
+    background: linear-gradient(white, darkgray);
+    position: static;
+    font-size: 36px;
+    margin: 20px 0 20px 0;
+    padding: 20px;
+    color: #333;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+.character {
+    box-sizing: border-box;
+    display: inline-block;
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.charName {
+    font-size: 18px;
+    top: 0px;
+    background: gray;
+    background: linear-gradient(#333, #777);
+    border: 2px solid black;
+    border-bottom: 0; 
+    padding: 2px 0 2px 0; 
+    margin: 0;
+}
+
+.charHealth {
+    bottom: 0;
+    font-size: 14px;
+    background: gray;
+    background: linear-gradient(#777, #333);
+    border: 2px solid black;
+    border-top: 0;  
+    padding: 2px 0 2px 0;
+    margin: 0;
+}
+
+.characterImage{
+    width: 100%;
+    border: black 2px solid;
+}
+
+#charSelect {
+    font-size: 24px;
+    border-bottom: 2px gray solid;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+}
+
+#characters {
+    background: radial-gradient(closest-side, white, rgba(255,255,255,0));
+}
+
+#arena {
+    height: 168px;
+    background-image: url("../images/arena_background.jpg");
+    border: 2px #333 solid;
+    margin-top: 16px;
+    padding-top: 20px;
+}
+
+#playerDiv {
+    position: absolute;
+    width: 124px;
+    height: 124px;
+    border: 2px solid green;
+    left: calc(50% - 62px - 124px);
+}
+
+#enemyDiv {
+    position: absolute;
+    width: 124px;
+    height: 124px;
+    border: solid 2px red;
+    left: calc(50% - 62px + 124px);
+}
+
+#combatText {
+    margin-top: 20px;
+    font-size: 18px;
+}
