@@ -1,57 +1,27 @@
+// you can use a object constructor for all of these objects to DRY it up
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects#Using_a_constructor_function
+function guardian(name, id, image, origHealth, health, origAttack, attack, counterAttack) {
+  this.name = name;
+  this.id = id;
+  this.image = image;
+  this.origHealth = origHealth;
+  this.health = health;
+  this.origAttack = origAttack;
+  this.attack = attack;
+  this.counterAttack = counterAttack;
+}
 
-var starLord = {
-    name: "Star Lord",
-    id: "0",
-    image: "assets/images/character_1.png",
-    origHealth: 100,
-    health: 100,
-    origAttack: 6,
-    attack: 6,
-    counterAttack: 12
-}
-var drax = {
-    name: "Drax",
-    id: "1",
-    image: "assets/images/character_2.png",
-    origHealth: 140,
-    health: 140,
-    origAttack: 5,
-    attack: 5,
-    counterAttack: 10
-}
-var groot = {
-    name: "Groot",
-    id: "2",
-    image: "assets/images/character_3.png",
-    origHealth: 200,
-    health: 200,
-    origAttack: 2,
-    attack: 2,
-    counterAttack: 15
-}
-var gamora = {
-    name: "Gamora",
-    id: "3",
-    image: "assets/images/character_4.png",
-    origHealth: 75,
-    health: 75,
-    origAttack: 11,
-    attack: 11,
-    counterAttack: 20
-}
-var rocket = {
-    name: "Rocket",
-    id: "4",
-    image: "assets/images/character_5.png",
-    origHealth: 65,
-    health: 65,
-    origAttack: 15,
-    attack: 15,
-    counterAttack: 5
-}
+starLord = new guardian("Star Lord", "0", "assets/images/character_1.png", 100, 100, 6, 6, 12);
+drax = new guardian("Drax", "1", "assets/images/character_2.png", 140, 140, 5, 5, 10);
+groot = new guardian("Groot", "2", "assets/images/character_3.png", 200, 200, 2, 2, 15);
+gamora = new guardian("Gamora", "3", "assets/images/character_4.png", 75, 75, 11, 11, 20);
+rocket = new guardian("Rocket", "4", "assets/images/character_5.png", 65, 65, 15, 15, 5);
+
 var characters = [starLord, drax, groot, gamora, rocket];
 var player = null;
 var enemy = null;
+// I was getting this attackBtn as undefined below, so declared it up here
+var attackBtn;
 
 //Play game
 $(document).ready(function() {
@@ -133,7 +103,7 @@ function enemySelected(enemyDiv) {
     
     //Update HTML with attack button if it's the first enemy
     if ($("#characters").find(".character").length === 3) {
-        var attackBtn = $("<button>");
+        attackBtn = $("<button>");
         attackBtn.text("Attack");
         $("#arena").append(attackBtn);
     }
@@ -152,7 +122,16 @@ function enemySelected(enemyDiv) {
 function attack() {
     //Player attacks
     var preAttack = player.attack;
+    // something strange is going on where the enemy is attacked multiple times
+    // after the second character is picked. Take a look at the attack points vs
+    // hp lost. You will see these statements print out twice when the second (or later)
+    // character is being fought against. I couldn't figure it out in a quick glance through,
+    // but I can help you debug this if you would like.
+    console.log("player attack " + player.attack);
+    console.log("enemy attack " + enemy.attack);
+    console.log("enemy health before " + enemy.health);
     enemy.health -= player.attack;
+    console.log("enemy health after " + enemy.health);
     player.attack += player.origAttack;
     $(enemyDiv).find(".charHealth").text("HP: " + enemy.health);
 
